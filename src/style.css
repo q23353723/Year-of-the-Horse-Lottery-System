@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-horse-red: #E60012;
+  --color-horse-gold: #FFD700;
+  --color-horse-dark: #8B0000;
+}
+
+body {
+  background-color: var(--color-horse-dark);
+  color: var(--color-horse-gold);
+  font-family: 'Noto Serif TC', serif;
+}
