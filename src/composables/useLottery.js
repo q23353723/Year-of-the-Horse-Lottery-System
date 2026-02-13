@@ -4,6 +4,7 @@ const participants = ref([]);
 const winners = ref([]);
 const currentDraw = ref([]);
 const isDrawing = ref(false);
+const drawLimit = ref(null); // 設定的抽獎人數上限，null 表示未設定
 
 export function useLottery() {
 
@@ -24,6 +25,44 @@ export function useLottery() {
         participants.value = [];
         winners.value = [];
         currentDraw.value = [];
+        drawLimit.value = null; // 重置抽獎人數上限
+    };
+
+    // 設定抽獎人數上限
+    const setDrawLimit = (limit) => {
+        // 驗證輸入
+        if (!Number.isInteger(limit) || limit <= 0) {
+            throw new Error('抽獎人數必須是正整數');
+        }
+
+        if (limit > participants.value.length) {
+            throw new Error(`抽獎人數不能超過參與人數 ${participants.value.length} 人`);
+        }
+
+        // 如果已經有人中獎，警告並詢問是否清除結果
+        if (winners.value.length > 0) {
+            throw new Error('重新設定'); // 特殊標記，讓元件決定是否確認
+        }
+
+        drawLimit.value = limit;
+    };
+
+    // 強制設定抽獎人數上限（用於用戶確認後的重新設定）
+    const setDrawLimitForce = (limit) => {
+        // 驗證輸入
+        if (!Number.isInteger(limit) || limit <= 0) {
+            throw new Error('抽獎人數必須是正整數');
+        }
+
+        if (limit > participants.value.length) {
+            throw new Error(`抽獎人數不能超過參與人數 ${participants.value.length} 人`);
+        }
+
+        // 清除已有的中獎記錄
+        winners.value = [];
+        currentDraw.value = [];
+
+        drawLimit.value = limit;
     };
 
     const draw = (count = 1) => {
@@ -66,7 +105,15 @@ export function useLottery() {
     };
 
     const remainingCount = computed(() => {
-        return participants.value.length - winners.value.length;
+        // 如果未設定抽獎上限，剩餘人數 = 全部參與者 - 已中獎
+        if (drawLimit.value === null) {
+            return participants.value.length - winners.value.length;
+        }
+
+        // 已設定上限時，剩餘人數 = min(設定上限 - 已中獎, 實際可用人數)
+        const actualAvailable = participants.value.length - winners.value.length;
+        const remainingByLimit = Math.max(0, drawLimit.value - winners.value.length);
+        return Math.min(remainingByLimit, actualAvailable);
     });
 
     return {
@@ -74,9 +121,12 @@ export function useLottery() {
         winners,
         currentDraw,
         isDrawing,
+        drawLimit,
         addParticipants,
         clearParticipants,
         draw,
+        setDrawLimit,
+        setDrawLimitForce,
         remainingCount
     };
 }

@@ -31,5 +31,6 @@ dist-ssr
 
 # Agent specific
 .agent/
+.github/
 brain/
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-horse-dark bg-[url('/bg-pattern.svg')] bg-cover text-white font-serif flex flex-col">
+  <div class="min-h-screen bg-horse-dark bg-[url('/bg-pattern.svg')] bg-cover text-white font-sans flex flex-col">
     <!-- Header -->
     <header class="p-6 text-center border-b-4 border-horse-gold shadow-lg bg-horse-red relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/chinese-new-year.png')]"></div>
+      <div class="absolute top-0 left-0 w-full h-full opacity-0 bg-[url('https://www.transparenttextures.com/patterns/chinese-new-year.png')]"></div>
       <h1 class="text-4xl md:text-6xl font-bold text-horse-gold drop-shadow-md z-10 relative">
         🐎 金馬奔騰 • 新春大抽獎 🧧
       </h1>
@@ -20,6 +20,7 @@
 
         <!-- Lottery Stage -->
         <div v-else class="w-full flex flex-col items-center animate-fade-in-up">
+           <SfcDrawLimit />
            <SfcLottery />
            <SfcResult />
            
@@ -44,6 +45,7 @@
 <script setup>
 import { useLottery } from './composables/useLottery';
 import SfcUpload from './components/SfcUpload.vue';
+import SfcDrawLimit from './components/SfcDrawLimit.vue';
 import SfcLottery from './components/SfcLottery.vue';
 import SfcResult from './components/SfcResult.vue';
 

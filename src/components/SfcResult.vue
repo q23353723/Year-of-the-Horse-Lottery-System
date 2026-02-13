@@ -6,7 +6,7 @@
       </h2>
       <button 
         @click="exportExcel"
-        class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg transition-colors shadow-lg flex items-center gap-2 font-bold border border-green-400"
+        class="bg-green-600 hover:bg-green-500 hover:cursor-pointer text-white px-5 py-2 rounded-lg transition-colors shadow-lg flex items-center gap-2 font-bold border border-green-400"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -24,7 +24,7 @@
         <span class="font-bold text-red-600 bg-yellow-200 w-6 h-6 rounded-full flex items-center justify-center text-xs">
           {{ index + 1 }}
         </span>
-        <span class="font-bold truncate">{{ person.name || person['姓名'] || person['Name'] }}</span>
+        <span class="font-bold truncate">{{ person.EmpNo || person['工號'] || person['emp_no'] }} {{ person.name || person['姓名'] || person['Name'] }}</span>
       </div>
     </div>
   </div>

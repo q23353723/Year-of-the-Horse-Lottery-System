@@ -11,7 +11,7 @@
           :key="winner.id"
           class="bg-yellow-50 text-red-900 font-bold text-2xl md:text-3xl p-4 rounded-lg shadow-[0_4px_0_rgb(180,83,9)] animate-bounce-in border-2 border-yellow-500 w-48 h-32 flex items-center justify-center text-center leading-tight hover:scale-105 transition-transform"
         >
-          {{ winner.name || winner['姓名'] || winner['Name'] || 'Winner' }}
+          {{ winner.EmpNo || winner['工號'] || winner['emp_no'] }} {{ winner.name || winner['姓名'] || winner['Name'] || 'Winner' }}
         </div>
       </div>
       <div v-else class="text-horse-gold text-4xl md:text-6xl font-bold opacity-50 z-10 animate-pulse drop-shadow-lg">
@@ -30,14 +30,14 @@
       <button 
         @click="handleDraw(1)" 
         :disabled="isDrawing || remainingCount < 1"
-        class="bg-gradient-to-b from-yellow-300 to-yellow-500 text-red-900 font-bold py-4 px-10 rounded-full shadow-[0_6px_0_rgb(180,83,9)] active:shadow-none active:translate-y-1 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-xl md:text-2xl border-2 border-yellow-200"
+        class="bg-gradient-to-b from-yellow-300 to-yellow-500 text-red-900 font-bold py-4 px-10 rounded-full shadow-[0_6px_0_rgb(180,83,9)] active:shadow-none active:translate-y-1 hover:cursor-pointer hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-xl md:text-2xl border-2 border-yellow-200"
       >
         🧧 單抽及第
       </button>
       <button 
         @click="handleDraw(10)" 
         :disabled="isDrawing || remainingCount < 10"
-        class="bg-gradient-to-b from-yellow-300 to-yellow-500 text-red-900 font-bold py-4 px-10 rounded-full shadow-[0_6px_0_rgb(180,83,9)] active:shadow-none active:translate-y-1 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-xl md:text-2xl border-2 border-yellow-200"
+        class="bg-gradient-to-b from-yellow-300 to-yellow-500 text-red-900 font-bold py-4 px-10 rounded-full shadow-[0_6px_0_rgb(180,83,9)] active:shadow-none active:translate-y-1 hover:cursor-pointer hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-xl md:text-2xl border-2 border-yellow-200"
       >
         🐎 十全十美
       </button>
@@ -72,14 +72,14 @@ const fireConfetti = () => {
 
     (function frame() {
         confetti({
-            particleCount: 5,
+            particleCount: 3,
             angle: 60,
             spread: 55,
             origin: { x: 0 },
             colors: ['#FFD700', '#E60012', '#FFFFFF']
         });
         confetti({
-            particleCount: 5,
+            particleCount: 3,
             angle: 120,
             spread: 55,
             origin: { x: 1 },
